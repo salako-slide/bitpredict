@@ -108,7 +108,7 @@
     (let
         (
             (market (unwrap! (map-get? markets market-id) err-not-found))
-            (current-block block-height)
+            (current-block stacks-block-height)
         )
         (asserts! (and (>= current-block (get start-block market)) 
                       (< current-block (get end-block market))) 
@@ -150,7 +150,7 @@
             (market (unwrap! (map-get? markets market-id) err-not-found))
         )
         (asserts! (is-eq tx-sender (var-get oracle-address)) err-owner-only)
-        (asserts! (>= block-height (get end-block market)) err-market-closed)
+        (asserts! (>= stacks-block-height (get end-block market)) err-market-closed)
         (asserts! (not (get resolved market)) err-market-closed)
         (asserts! (> end-price u0) err-invalid-parameter)
 
